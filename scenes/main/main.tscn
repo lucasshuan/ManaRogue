@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccbal38ajdv0g"]
+
+[ext_resource type="Script" path="res://scripts/Manager/SteamManager.cs" id="1_ry7hd"]
+[ext_resource type="Script" path="res://scripts/Manager/SceneManager.cs" id="2_rutkv"]
+[ext_resource type="PackedScene" uid="uid://8pymbpvd315i" path="res://scenes/main_menu/main_menu.tscn" id="3_1ofk4"]
+[ext_resource type="PackedScene" uid="uid://dsfblhr71mdrb" path="res://scenes/game/solo_game.tscn" id="3_rdd2v"]
+[ext_resource type="PackedScene" uid="uid://pnscn6ybtnf3" path="res://scenes/game/online_game.tscn" id="5_t71lk"]
+[ext_resource type="FontFile" uid="uid://1wd7j6b8upf6" path="res://ui/fonts/CONSOLA.TTF" id="6_otaos"]
+
+[sub_resource type="Theme" id="Theme_ofjmf"]
+default_font = ExtResource("6_otaos")
+default_font_size = 16
+
+[node name="Main" type="Node"]
+
+[node name="SteamManager" type="Node" parent="."]
+script = ExtResource("1_ry7hd")
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("2_rutkv")
+MainMenuScene = ExtResource("3_1ofk4")
+SoloGameScene = ExtResource("3_rdd2v")
+OnlineGameScene = ExtResource("5_t71lk")
+
+[node name="LoadingOverlay" type="CanvasLayer" parent="SceneManager"]
+layer = 10
+visible = false
+
+[node name="Backdrop" type="ColorRect" parent="SceneManager/LoadingOverlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 5
+color = Color(0, 0.306389, 0.257942, 0.392157)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SceneManager/LoadingOverlay"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -28.0
+offset_right = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_ofjmf")
+bbcode_enabled = true
+text = "[wave][right]Loading..."

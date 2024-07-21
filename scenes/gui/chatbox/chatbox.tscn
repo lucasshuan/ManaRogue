@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdd6qvyem24fb"]
+
+[ext_resource type="Script" path="res://scripts/GUI/Chatbox.cs" id="1_fgco8"]
+[ext_resource type="FontFile" uid="uid://1wd7j6b8upf6" path="res://ui/fonts/CONSOLA.TTF" id="2_kv6bs"]
+[ext_resource type="PackedScene" uid="uid://ddhp216wi33jl" path="res://scenes/gui/chatbox/message.tscn" id="2_mvmih"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugw1x"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_saob7"]
+Panel/styles/panel = SubResource("StyleBoxFlat_ugw1x")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wq03p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4cua"]
+
+[sub_resource type="Theme" id="Theme_i5tvl"]
+default_font = ExtResource("2_kv6bs")
+default_font_size = 12
+TextEdit/colors/caret_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_color = Color(1, 1, 1, 1)
+TextEdit/colors/font_placeholder_color = Color(1, 1, 1, 0.490196)
+TextEdit/styles/focus = SubResource("StyleBoxEmpty_wq03p")
+TextEdit/styles/normal = SubResource("StyleBoxEmpty_u4cua")
+
+[node name="Chatbox" type="CanvasLayer"]
+script = ExtResource("1_fgco8")
+_messageScene = ExtResource("2_mvmih")
+
+[node name="Chat" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.34902)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -857.0
+offset_top = -195.0
+offset_right = -551.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BackgroundPanel" type="Panel" parent="Chat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.993754, 1)
+theme = SubResource("Theme_saob7")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Chat"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 300.0
+offset_bottom = 170.0
+
+[node name="MessageHistory" type="VBoxContainer" parent="Chat/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="MessageEdit" type="TextEdit" parent="Chat"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -22.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_i5tvl")
+placeholder_text = "Type a message"
+wrap_mode = 1
+caret_blink = true

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddhp216wi33jl"]
+
+[ext_resource type="FontFile" uid="uid://1wd7j6b8upf6" path="res://ui/fonts/CONSOLA.TTF" id="1_0gjl4"]
+
+[sub_resource type="Theme" id="Theme_7jhix"]
+default_font = ExtResource("1_0gjl4")
+default_font_size = 12
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+
+[node name="Message" type="RichTextLabel"]
+custom_minimum_size = Vector2(0, 14)
+offset_right = 186.0
+offset_bottom = 13.0
+theme = SubResource("Theme_7jhix")
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2

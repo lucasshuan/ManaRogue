@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://pnscn6ybtnf3"]
+
+[ext_resource type="PackedScene" uid="uid://h52fx8r2bs3w" path="res://scenes/level/level.tscn" id="1_rliiu"]
+[ext_resource type="PackedScene" uid="uid://bdd6qvyem24fb" path="res://scenes/gui/chatbox/chatbox.tscn" id="2_2hh18"]
+[ext_resource type="PackedScene" uid="uid://bm14nii1snmy8" path="res://scenes/entity/player/player.tscn" id="3_dw5ko"]
+[ext_resource type="Script" path="res://scripts/Game/MainCamera.cs" id="4_ovdu6"]
+
+[node name="OnlineGame" type="Node"]
+metadata/_edit_vertical_guides_ = [-111.0]
+
+[node name="Chatbox" parent="." instance=ExtResource("2_2hh18")]
+
+[node name="Level" parent="." instance=ExtResource("1_rliiu")]
+
+[node name="Player" parent="." instance=ExtResource("3_dw5ko")]
+position = Vector2(355, 227)
+
+[node name="Camera" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true
+script = ExtResource("4_ovdu6")
+metadata/_edit_group_ = true
