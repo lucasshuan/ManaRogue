@@ -1,69 +1,43 @@
 using Godot;
-using ManaRogue.Scenes;
 
-namespace ManaRogue
+namespace ManaRogue.GUI
 {
+
 	public partial class MainMenu : CanvasLayer
 	{
-		private VBoxContainer _mainMenuContainer => GetNode<VBoxContainer>("MainMenuContainer");
-		private VBoxContainer _onlineContainer => GetNode<VBoxContainer>("OnlineContainer");
-
-		private Button _joinGameButton => GetNode<Button>("OnlineContainer/HBoxContainer/VBoxContainer/JoinGameButton");
-		private LineEdit _joinGameIDEdit => GetNode<LineEdit>("OnlineContainer/HBoxContainer/VBoxContainer/JoinGameIDEdit");
-
-		private string gameId = "";
-
-		private void _OnPlaySoloButtonPressed()
+		public enum Screen
 		{
-			SceneManager.Instance.GoToSoloGame();
+			Start,
+			Online,
 		}
 
-		private void _OnOnlineButtonPressed()
+		private MainMenuStartScreen _startScreen => GetNode<MainMenuStartScreen>("StartScreen");
+		private MainMenuOnlineScreen _onlineScreen => GetNode<MainMenuOnlineScreen>("OnlineScreen");
+
+		private Screen _currentScreen = Screen.Start;
+
+		public static MainMenu Instance { get; private set; }
+
+		public override void _EnterTree()
 		{
-			_mainMenuContainer.Hide();
-			_onlineContainer.Show();
+			Instance = this;
 		}
 
-		private void _OnSettingsButtonPressed()
+		public void GoToScreen(Screen screen)
 		{
-			GD.Print("Settings button pressed");
-		}
-
-		private void _OnQuitButtonPressed()
-		{
-			GetTree().Quit();
-		}
-
-		private void _OnCreateGameButtonPressed()
-		{
-			// SteamManager.Instance.CreateLobby();
-		}
-
-		private void _OnJoinGameIDEditTextChanged(string new_text)
-		{
-			foreach (char c in new_text)
+			switch (screen)
 			{
-				if (!char.IsNumber(c))
-				{
-					new_text = new_text.Replace(c.ToString(), "");
-				}
+				case Screen.Start:
+					_currentScreen = Screen.Start;
+					_startScreen.Visible = true;
+					_onlineScreen.Visible = false;
+					break;
+				case Screen.Online:
+					_currentScreen = Screen.Online;
+					_startScreen.Visible = false;
+					_onlineScreen.Visible = true;
+					break;
 			}
-			_joinGameIDEdit.Text = "";
-			_joinGameIDEdit.InsertTextAtCaret(new_text);
-			_joinGameButton.Disabled = string.IsNullOrWhiteSpace(new_text);
-			_joinGameButton.MouseDefaultCursorShape = _joinGameButton.Disabled ? Control.CursorShape.Arrow : Control.CursorShape.PointingHand;
-			gameId = new_text;
-		}
-
-		private void _OnJoinGameButtonPressed()
-		{
-			// SteamManager.Instance.JoinLobby(ulong.Parse(gameId));
-		}
-
-		private void _OnBackButtonPressed()
-		{
-			_onlineContainer.Hide();
-			_mainMenuContainer.Show();
 		}
 	}
 }

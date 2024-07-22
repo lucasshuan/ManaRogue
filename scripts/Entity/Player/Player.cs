@@ -22,19 +22,7 @@ namespace ManaRogue.Entity
 
 		public override void _EnterTree()
 		{
-			if (Instance != null)
-			{
-				QueueFree();
-			}
 			Instance = this;
-		}
-
-		public override void _ExitTree()
-		{
-			if (Instance == this)
-			{
-				Instance = null;
-			}
 		}
 
 		public override void _PhysicsProcess(double delta)

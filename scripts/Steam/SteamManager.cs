@@ -33,7 +33,17 @@ namespace ManaRogue.Steam
         catch (Exception e)
         {
           GD.PrintErr("Error initializing Steam: " + e.Message);
+          Connected = false;
         }
+      }
+    }
+
+    public override void _Notification(int what)
+    {
+      if (what == NotificationWMCloseRequest)
+      {
+        SteamClient.Shutdown();
+        GetTree().Quit();
       }
     }
   }

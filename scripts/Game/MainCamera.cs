@@ -9,19 +9,7 @@ namespace ManaRogue.Game
 
     public override void _EnterTree()
     {
-      if (_instance != null)
-      {
-        return;
-      }
       _instance = this;
-    }
-
-    public override void _ExitTree()
-    {
-      if (_instance == this)
-      {
-        _instance = null;
-      }
     }
   }
 }
