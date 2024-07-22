@@ -16,80 +16,98 @@ namespace ManaRogue.GUI
 
 		private bool _active = false;
 
-		public enum ChatMessageType
-		{
-			Chat,
-			Warn,
-		}
-
 		public override void _Ready()
 		{
 			Steam.LobbyChatUpdate += OnLobbyChatUpdate;
 			Steam.LobbyMessage += OnLobbyMessage;
 
-			SendChatMessage(ChatMessageType.Warn, $"<!> {SteamManager.Instance.SteamName} joined\n");
+			SendServerUpdate(Steam.ChatMemberStateChange.Entered, SteamManager.Instance.SteamName);
 		}
 
 		public override void _Process(double delta)
 		{
 			if (Input.IsActionJustPressed(Keybind.Chat))
 			{
-				_active = !_active;
-				_messageEdit.Visible = _active;
-				Player.Instance.Disabled = _active;
 				if (_active)
 				{
-					_chatControl.Modulate = new Color(1, 1, 1, 1);
-					_messageEdit.GrabFocus();
+					OpenChatbox();
 				}
 				else
 				{
-					_chatControl.Modulate = new Color(1, 1, 1, 0.35f);
-					_messageEdit.ReleaseFocus();
-					if (!string.IsNullOrWhiteSpace(_messageEdit.Text))
-					{
-						Steam.SendLobbyChatMsg(SteamManager.Instance.Lobby.Id, _messageEdit.Text);
-					}
-					_messageEdit.Text = "";
+					SendChatMessage();
 				}
 			}
+			if (Input.IsActionJustPressed(Keybind.Escape))
+			{
+				CloseChatbox();
+			}
+		}
+
+		private void OpenChatbox()
+		{
+			if (Player.Instance.Disabled)
+				return;
+
+			_active = true;
+			_chatControl.Modulate = new Color(1, 1, 1, 1);
+			_messageEdit.Visible = true;
+			_messageEdit.GrabFocus();
+			Player.Instance.Disabled = true;
+		}
+
+		private void CloseChatbox()
+		{
+			if (!_active)
+				return;
+
+			_active = false;
+			_chatControl.Modulate = new Color(1, 1, 1, 0.35f);
+			_messageEdit.ReleaseFocus();
+			Player.Instance.Disabled = false;
+		}
+
+		public void AddMessageToChatHistory(Color color, string message)
+		{
+			var label = _messageScene.Instantiate<RichTextLabel>();
+			label.PushColor(color);
+			label.AppendText(message);
+			_messageHistory.AddChild(label);
+		}
+
+		private void SendChatMessage()
+		{
+			if (!string.IsNullOrWhiteSpace(_messageEdit.Text))
+			{
+				Steam.SendLobbyChatMsg(SteamManager.Instance.Lobby.Id, _messageEdit.Text);
+			}
+			_messageEdit.Text = "";
+		}
+
+		private void SendServerUpdate(Steam.ChatMemberStateChange state, string changerName)
+		{
+			var message = "<!> ";
+
+			if (state == Steam.ChatMemberStateChange.Entered) message += $"{changerName} has joined";
+			else if (state == Steam.ChatMemberStateChange.Left) message += $"{changerName} has left";
+			else if (state == Steam.ChatMemberStateChange.Kicked) message += $"{changerName} has been kicked";
+			else if (state == Steam.ChatMemberStateChange.Banned) message += $"{changerName} has been banned";
+			else if (state == Steam.ChatMemberStateChange.Disconnected) message += $"{changerName} lost connection";
+			else message += $"{changerName} did... something";
+
+			AddMessageToChatHistory(Colors.Yellow, message);
 		}
 
 		public void OnLobbyChatUpdate(ulong lobbyId, long changedId, long makingChangeId, long chatState)
 		{
 			var changerName = Steam.GetFriendPersonaName((ulong)changedId);
 
-			var state = (Steam.ChatMemberStateChange)chatState;
-			var message = "<!>";
-
-			if (state == Steam.ChatMemberStateChange.Entered) message += $"{changerName} joined";
-			else if (state == Steam.ChatMemberStateChange.Left) message += $"{changerName} left";
-			else if (state == Steam.ChatMemberStateChange.Kicked) message += $"{changerName} has been kicked";
-			else if (state == Steam.ChatMemberStateChange.Banned) message += $"{changerName} has been banned";
-			else if (state == Steam.ChatMemberStateChange.Disconnected) message += $"{changerName} lost connection";
-			else message += $"{changerName} did... something";
-
-			SendChatMessage(ChatMessageType.Warn, message);
+			SendServerUpdate((Steam.ChatMemberStateChange)chatState, changerName);
 		}
 
 		public void OnLobbyMessage(ulong lobbyId, long userId, string message, long chatType)
 		{
 			var userName = Steam.GetFriendPersonaName((ulong)userId);
-			SendChatMessage(ChatMessageType.Chat, $"<{userName}>: {message}");
-		}
-
-		public void SendChatMessage(ChatMessageType type, string message)
-		{
-			Color color = type switch
-			{
-				ChatMessageType.Chat => Colors.White,
-				ChatMessageType.Warn => Colors.Yellow,
-				_ => Colors.White
-			};
-			var label = _messageScene.Instantiate<RichTextLabel>();
-			label.PushColor(color);
-			label.AppendText(message);
-			_messageHistory.AddChild(label);
+			AddMessageToChatHistory(Colors.White, $"<{userName}>: {message}");
 		}
 	}
 }

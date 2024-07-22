@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsfblhr71mdrb"]
+[gd_scene load_steps=5 format=3 uid="uid://dsfblhr71mdrb"]
 
 [ext_resource type="PackedScene" uid="uid://h52fx8r2bs3w" path="res://scenes/level/level.tscn" id="1_eqavc"]
+[ext_resource type="PackedScene" uid="uid://be4qxs7g8c4ey" path="res://scenes/gui/pause_menu/pause_menu.tscn" id="1_ksgd4"]
 [ext_resource type="PackedScene" uid="uid://bm14nii1snmy8" path="res://scenes/entity/player/player.tscn" id="2_m6fm3"]
 [ext_resource type="Script" path="res://scripts/Game/MainCamera.cs" id="3_detqs"]
 
 [node name="SoloGame" type="Node"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_ksgd4")]
 
 [node name="Level" parent="." instance=ExtResource("1_eqavc")]
 

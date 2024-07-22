@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://pnscn6ybtnf3"]
+[gd_scene load_steps=6 format=3 uid="uid://pnscn6ybtnf3"]
 
+[ext_resource type="PackedScene" uid="uid://be4qxs7g8c4ey" path="res://scenes/gui/pause_menu/pause_menu.tscn" id="1_nw7ri"]
 [ext_resource type="PackedScene" uid="uid://h52fx8r2bs3w" path="res://scenes/level/level.tscn" id="1_rliiu"]
 [ext_resource type="PackedScene" uid="uid://bdd6qvyem24fb" path="res://scenes/gui/chatbox/chatbox.tscn" id="2_2hh18"]
 [ext_resource type="PackedScene" uid="uid://bm14nii1snmy8" path="res://scenes/entity/player/player.tscn" id="3_dw5ko"]
@@ -7,6 +8,8 @@
 
 [node name="OnlineGame" type="Node"]
 metadata/_edit_vertical_guides_ = [-111.0]
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_nw7ri")]
 
 [node name="Chatbox" parent="." instance=ExtResource("2_2hh18")]
 

@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 5
-color = Color(0, 0.306389, 0.257942, 0.392157)
+color = Color(0, 0.223529, 0.188235, 0.588235)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="SceneManager/LoadingOverlay"]
 anchors_preset = 3

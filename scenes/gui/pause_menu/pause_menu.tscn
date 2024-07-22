@@ -1,0 +1,145 @@
+[gd_scene load_steps=8 format=3 uid="uid://be4qxs7g8c4ey"]
+
+[ext_resource type="FontFile" uid="uid://1wd7j6b8upf6" path="res://ui/fonts/CONSOLA.TTF" id="1_cpbvn"]
+[ext_resource type="Script" path="res://scripts/GUI/PauseMenu.cs" id="1_wiq48"]
+
+[sub_resource type="Theme" id="Theme_po1m0"]
+default_font = ExtResource("1_cpbvn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2bxm"]
+bg_color = Color(0.52549, 0.752941, 0.423529, 0.588235)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.588235)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwvk5"]
+bg_color = Color(0.672742, 0.825151, 0.444017, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0knnx"]
+bg_color = Color(0.52549, 0.752941, 0.423529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_66weo"]
+default_font = ExtResource("1_cpbvn")
+default_font_size = 14
+Button/colors/font_color = Color(0.188235, 0.407843, 0.313726, 1)
+Button/colors/font_disabled_color = Color(0.188235, 0.407843, 0.313726, 1)
+Button/colors/font_focus_color = Color(0.188235, 0.407843, 0.313726, 1)
+Button/colors/font_hover_color = Color(0.188235, 0.407843, 0.313726, 1)
+Button/colors/font_pressed_color = Color(0.188235, 0.407843, 0.313726, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_f2bxm")
+Button/styles/focus = SubResource("StyleBoxFlat_cwvk5")
+Button/styles/hover = SubResource("StyleBoxFlat_cwvk5")
+Button/styles/normal = SubResource("StyleBoxFlat_0knnx")
+Button/styles/pressed = SubResource("StyleBoxFlat_cwvk5")
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_wiq48")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.20327e-08, 0.223357, 0.18706, 0.588235)
+
+[node name="GameIDContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -123.0
+offset_right = 150.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameIDContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameIDLabel" type="Label" parent="GameIDContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_po1m0")
+theme_override_constants/outline_size = 1
+text = "Game ID:"
+
+[node name="GameIDField" type="Label" parent="GameIDContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_po1m0")
+
+[node name="CopyButton" type="Button" parent="GameIDContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_66weo")
+text = "COPY"
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.5
+offset_right = 150.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="OptionsButton" type="Button" parent="MainMenuContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_66weo")
+text = "OPTIONS"
+
+[node name="LeaveGameButton" type="Button" parent="MainMenuContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = SubResource("Theme_66weo")
+text = "LEAVE GAME"
+
+[connection signal="pressed" from="GameIDContainer/CopyButton" to="." method="_OnCopyButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/OptionsButton" to="." method="_OnOptionsButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/LeaveGameButton" to="." method="_OnLeaveGameButtonPressed"]

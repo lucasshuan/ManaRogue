@@ -15,5 +15,13 @@ namespace ManaRogue.Game
       }
       _active = this;
     }
+
+    public override void _ExitTree()
+    {
+      if (_active == this)
+      {
+        _active = null;
+      }
+    }
   }
 }

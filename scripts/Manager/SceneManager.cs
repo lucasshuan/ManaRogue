@@ -8,9 +8,6 @@ namespace ManaRogue.Manager
     [Export] public PackedScene SoloGameScene { get; set; }
     [Export] public PackedScene OnlineGameScene { get; set; }
 
-    private static SceneManager _instance;
-    public static SceneManager Instance => _instance;
-
     private bool _loading = false;
     public bool Loading
     {
@@ -26,6 +23,9 @@ namespace ManaRogue.Manager
 
     private CanvasLayer _loadingGUI => GetNode<CanvasLayer>("LoadingOverlay");
 
+    private static SceneManager _instance;
+    public static SceneManager Instance => _instance;
+
     public override void _EnterTree()
     {
       if (_instance != null)
@@ -33,6 +33,14 @@ namespace ManaRogue.Manager
         QueueFree();
       }
       _instance = this;
+    }
+
+    public override void _ExitTree()
+    {
+      if (_instance == this)
+      {
+        _instance = null;
+      }
     }
 
     public override void _Ready()

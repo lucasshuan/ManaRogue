@@ -5,9 +5,6 @@ namespace ManaRogue.Entity
 {
 	public partial class Player : CharacterBody2D
 	{
-		private static Player _instance;
-		public static Player Instance => _instance;
-
 		private float _speed = 65.0f;
 		private const float _acceleration = 0.25f;
 		private const float _friction = 0.35f;
@@ -21,6 +18,9 @@ namespace ManaRogue.Entity
 
 		private AnimationPlayer _animationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 
+		private static Player _instance;
+		public static Player Instance => _instance;
+
 		public override void _EnterTree()
 		{
 			if (_instance != null)
@@ -28,6 +28,14 @@ namespace ManaRogue.Entity
 				QueueFree();
 			}
 			_instance = this;
+		}
+
+		public override void _ExitTree()
+		{
+			if (_instance == this)
+			{
+				_instance = null;
+			}
 		}
 
 		public override void _PhysicsProcess(double delta)

@@ -9,7 +9,7 @@ default_font_size = 34
 RichTextLabel/colors/default_color = Color(0.52549, 0.752941, 0.423529, 1)
 RichTextLabel/fonts/normal_font = ExtResource("1_ynqfe")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3uhy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nykwi"]
 bg_color = Color(0.52549, 0.752941, 0.423529, 0.588235)
 border_width_left = 1
 border_width_top = 1
@@ -21,7 +21,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwvk5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0orxe"]
 bg_color = Color(0.672742, 0.825151, 0.444017, 1)
 border_width_left = 1
 border_width_top = 1
@@ -33,7 +33,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w21m1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ph050"]
 bg_color = Color(0.52549, 0.752941, 0.423529, 1)
 border_width_left = 1
 border_width_top = 1
@@ -53,11 +53,11 @@ Button/colors/font_disabled_color = Color(0.188235, 0.407843, 0.313726, 1)
 Button/colors/font_focus_color = Color(0.188235, 0.407843, 0.313726, 1)
 Button/colors/font_hover_color = Color(0.188235, 0.407843, 0.313726, 1)
 Button/colors/font_pressed_color = Color(0.188235, 0.407843, 0.313726, 1)
-Button/styles/disabled = SubResource("StyleBoxFlat_c3uhy")
-Button/styles/focus = SubResource("StyleBoxFlat_cwvk5")
-Button/styles/hover = SubResource("StyleBoxFlat_cwvk5")
-Button/styles/normal = SubResource("StyleBoxFlat_w21m1")
-Button/styles/pressed = SubResource("StyleBoxFlat_cwvk5")
+Button/styles/disabled = SubResource("StyleBoxFlat_nykwi")
+Button/styles/focus = SubResource("StyleBoxFlat_0orxe")
+Button/styles/hover = SubResource("StyleBoxFlat_0orxe")
+Button/styles/normal = SubResource("StyleBoxFlat_ph050")
+Button/styles/pressed = SubResource("StyleBoxFlat_0orxe")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11k63"]
 content_margin_left = 8.0
@@ -152,7 +152,7 @@ size_flags_vertical = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = SubResource("Theme_yhkma")
-text = "SETTINGS"
+text = "OPTIONS"
 
 [node name="QuitButton" type="Button" parent="MainMenuContainer"]
 texture_filter = 1

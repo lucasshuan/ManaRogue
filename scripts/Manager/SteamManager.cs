@@ -6,8 +6,6 @@ namespace ManaRogue.Manager
 {
   public partial class SteamManager : Node
   {
-    private static SteamManager _instance;
-    public static SteamManager Instance => _instance;
 
     public SteamLobby Lobby { get; set; }
 
@@ -15,6 +13,9 @@ namespace ManaRogue.Manager
 
     public ulong SteamId;
     public string SteamName;
+
+    private static SteamManager _instance;
+    public static SteamManager Instance => _instance;
 
     public override void _EnterTree()
     {
@@ -94,7 +95,9 @@ namespace ManaRogue.Manager
       if (connect == 1)
       {
         Lobby = new SteamLobby { Id = lobbyId };
+#pragma warning disable CS0612
         Steam.AllowP2PPacketRelay(true);
+#pragma warning restore CS0612
       }
     }
 
