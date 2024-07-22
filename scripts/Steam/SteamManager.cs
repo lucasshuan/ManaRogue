@@ -24,8 +24,10 @@ namespace ManaRogue.Steam
           SteamClient.Init(gameAppId, true);
           if (!SteamClient.IsValid)
           {
-            throw new Exception("SteamClient is not valid");
+            throw new Exception("Steam client is not valid");
           }
+          SteamNetworking.AllowP2PPacketRelay(true);
+
           UserName = SteamClient.Name;
           UserId = SteamClient.SteamId;
           Connected = true;
@@ -44,6 +46,17 @@ namespace ManaRogue.Steam
       {
         SteamClient.Shutdown();
         GetTree().Quit();
+      }
+    }
+
+    public void ReadP2PPacket()
+    {
+      var packetFound = SteamNetworking.AllowP2PPacketRelay(true);
+      if (packetFound)
+      {
+        var packet = SteamNetworking.ReadP2PPacket(0);
+        var senderId = packet.Value.SteamId;
+        var data = packet.Value.Data;
       }
     }
   }
