@@ -7,7 +7,7 @@ namespace ManaRogue.Entity
   {
     public override void _Process(double delta)
     {
-      Scale = Vector2.One / MainCamera.Active.Zoom;
+      Scale = Vector2.One / MainCamera.Instance.Zoom;
     }
   }
 }

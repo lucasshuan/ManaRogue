@@ -18,23 +18,22 @@ namespace ManaRogue.Entity
 
 		private AnimationPlayer _animationPlayer => GetNode<AnimationPlayer>("AnimationPlayer");
 
-		private static Player _instance;
-		public static Player Instance => _instance;
+		public static Player Instance { get; private set; }
 
 		public override void _EnterTree()
 		{
-			if (_instance != null)
+			if (Instance != null)
 			{
 				QueueFree();
 			}
-			_instance = this;
+			Instance = this;
 		}
 
 		public override void _ExitTree()
 		{
-			if (_instance == this)
+			if (Instance == this)
 			{
-				_instance = null;
+				Instance = null;
 			}
 		}
 

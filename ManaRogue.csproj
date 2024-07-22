@@ -2,5 +2,11 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>ManaRogue</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>./packages/Facepunch.Steamworks.Win64.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 using Godot;
-using ManaRogue.Manager;
+using ManaRogue.Scenes;
 
 namespace ManaRogue
 {
@@ -36,7 +36,7 @@ namespace ManaRogue
 
 		private void _OnCreateGameButtonPressed()
 		{
-			SteamManager.Instance.CreateLobby();
+			// SteamManager.Instance.CreateLobby();
 		}
 
 		private void _OnJoinGameIDEditTextChanged(string new_text)
@@ -57,7 +57,7 @@ namespace ManaRogue
 
 		private void _OnJoinGameButtonPressed()
 		{
-			SteamManager.Instance.JoinLobby(ulong.Parse(gameId));
+			// SteamManager.Instance.JoinLobby(ulong.Parse(gameId));
 		}
 
 		private void _OnBackButtonPressed()

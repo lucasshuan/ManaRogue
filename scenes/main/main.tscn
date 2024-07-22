@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ccbal38ajdv0g"]
 
-[ext_resource type="Script" path="res://scripts/Manager/SteamManager.cs" id="1_ry7hd"]
-[ext_resource type="Script" path="res://scripts/Manager/SceneManager.cs" id="2_rutkv"]
+[ext_resource type="Script" path="res://scripts/Steam/SteamManager.cs" id="1_055i7"]
+[ext_resource type="Script" path="res://scripts/Scenes/SceneManager.cs" id="1_vu6x4"]
 [ext_resource type="PackedScene" uid="uid://8pymbpvd315i" path="res://scenes/main_menu/main_menu.tscn" id="3_1ofk4"]
 [ext_resource type="PackedScene" uid="uid://dsfblhr71mdrb" path="res://scenes/game/solo_game.tscn" id="3_rdd2v"]
 [ext_resource type="PackedScene" uid="uid://pnscn6ybtnf3" path="res://scenes/game/online_game.tscn" id="5_t71lk"]
@@ -14,10 +14,10 @@ default_font_size = 16
 [node name="Main" type="Node"]
 
 [node name="SteamManager" type="Node" parent="."]
-script = ExtResource("1_ry7hd")
+script = ExtResource("1_055i7")
 
 [node name="SceneManager" type="Node" parent="."]
-script = ExtResource("2_rutkv")
+script = ExtResource("1_vu6x4")
 MainMenuScene = ExtResource("3_1ofk4")
 SoloGameScene = ExtResource("3_rdd2v")
 OnlineGameScene = ExtResource("5_t71lk")

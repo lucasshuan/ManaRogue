@@ -4,23 +4,23 @@ namespace ManaRogue.Game
 {
   public partial class MainCamera : Camera2D
   {
-    private static MainCamera _active;
-    public static MainCamera Active => _active;
+    private static MainCamera _instance;
+    public static MainCamera Instance => _instance;
 
     public override void _EnterTree()
     {
-      if (_active != null)
+      if (_instance != null)
       {
         return;
       }
-      _active = this;
+      _instance = this;
     }
 
     public override void _ExitTree()
     {
-      if (_active == this)
+      if (_instance == this)
       {
-        _active = null;
+        _instance = null;
       }
     }
   }
